@@ -8,14 +8,16 @@
 }
 
 main{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
   max-width: 1280px;
   height: 100vh;
 }
 
 header{
-  position: sticky;
-  top: 0;
   margin-bottom: 5rem;
 }
 
@@ -45,4 +47,34 @@ form{
   cursor: pointer;
   font-size: 18px;
   width: 200px;
+}
+
+.weather-container{
+  display: flex;
+  flex-direction: column;
+  margin: 5rem auto;
+}
+
+.weather-information{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
+}
+
+.weather-h2{
+  margin: 2rem auto;
+  font-size: 46px;
+  text-align: center;
+}
+
+.card{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+h3{
+  margin: 2rem auto;
 }

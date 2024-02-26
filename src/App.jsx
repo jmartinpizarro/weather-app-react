@@ -11,6 +11,10 @@ function App() {
     event.preventDefault();
     setLocation(document.getElementById('input').value);
   };
+
+  const setCelsius = (farenheit) => {
+    return Math.round((farenheit - 32) * (5/9))
+  }
   
   useEffect(() => {
     if (location) {
@@ -23,6 +27,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         const { currentConditions } = data;
+        console.log(currentConditions)
         setWeatherData(currentConditions);
       })
       .catch(error => {
@@ -43,8 +48,26 @@ function App() {
 
       {/* if data is available */}
       {weatherData && (
-        <div>
-          <h2>Weather for {location}</h2>
+        <div className='weather-container'>
+          <h2 className="weather-h2">Weather for {location}</h2>
+          <div className="weather-information">
+            <div className="card">
+              <h3>Temperature</h3>
+              <p>{setCelsius(weatherData.temp)} °C</p>
+            </div>
+
+            <div className="card">
+              <h3>Weather Conditions</h3>
+              <p>Conditions are: {weatherData.conditions}</p>
+            </div>
+
+            <div className="card">
+              <h3>Humidity</h3>
+              <p>Humidity is: {weatherData.humidity}%</p>
+            </div>
+
+
+          </div>
         </div>
       )}
     </main>
