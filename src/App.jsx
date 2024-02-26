@@ -1,34 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+const API_KEY = `LEPAEYENMR9QWD2GPVE6Z535S`
+
+
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [location, setLocation] = useState('')
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    setLocation(document.getElementById('input').value)
+  }
+
+  useFetch(location)
+
+  function useFetch(location){ /* custom hook for fetching */
+    const BASE_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}`
+    fetch(BASE_URL)
+    .then(res => res.json())
+    .then(data => {
+      const {currentConditions} = data
+      console.log(currentConditions)
+    })
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+   <main>
+      <header>
+        <h1 className='main-h1'>weatherChecker = true</h1>
+      </header>
+
+      <form>
+        <input type="text" placeholder='What city are you looking for?' className='input-form' id='input'/>
+        <button className='input-btn' onClick={handleClick}>Show me the weather!</button>
+      </form>
+   </main>
   )
 }
 
